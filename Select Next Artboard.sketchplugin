@@ -1,0 +1,29 @@
+var all_artboards = [[doc currentPage] artboards]
+
+var currLayer
+if ([selection count] > 0) {
+	currLayer = selection[0]
+} else {
+	currLayer = [[doc currentPage] artboards][([all_artboards count] - 1)]
+}
+
+var myArtboard = currLayer
+while([myArtboard parentGroup] != [doc currentPage]) {
+	myArtboard = [myArtboard parentGroup]
+}
+
+for(var i=0; i < [all_artboards count]; i++) {
+	var currArtboard = all_artboards[i]
+	if (currArtboard == myArtboard) {
+		var value = i + 1
+		if (i + 1 == [all_artboards count]) {
+			value = 0
+		}
+		var nextArtboard = all_artboards[value]
+		[[doc currentPage] deselectAllLayers]
+		[nextArtboard select:true byExpandingSelection:true]
+		view = [doc currentView]
+		var rektView = [nextArtboard absoluteRect]
+		[view zoomToFitRect:rektView]
+	}
+}
