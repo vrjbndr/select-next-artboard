@@ -1,5 +1,5 @@
 # Workflow Sketch Plugins
-A collection of plugins I created to help with my sketch workflow. A work in progress. Hopefully you find some of them useful!
+A collection of plugins I created to help with my sketch workflow. **A work in progress.** Hopefully you find some of them useful!
 
 To install, double click on any of the .sketchplugin files and sketch will place them under the menu item "plugins."
 
