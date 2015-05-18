@@ -1,26 +1,32 @@
-var all_artboards = [[doc currentPage] artboards]
+var doc = context.document;
+var selection = context.selection;
+var view = [doc currentView];
 
-var myArtboard
+
+var all_artboards = [[doc currentPage] artboards];
+
+var myArtboard;
 if ([selection count] > 0) {
-	myArtboard = selection[0]
+	myArtboard = selection[0];
 } else {
-	myArtboard = [[doc currentPage] artboards][0]
+	myArtboard = [[doc currentPage] artboards][([all_artboards count] - 1)];
 }
+
 
 while([myArtboard parentGroup] != [doc currentPage]) {
 	myArtboard = [myArtboard parentGroup]
 }
 
+
 for(var i=0; i < [all_artboards count]; i++) {
 	if (all_artboards[i] == myArtboard) {
 		var value = i - 1
-		if (i == 0) {
+		if (i + 1 == [all_artboards count]) {
 			value = [all_artboards count] - 1
 		}
-		var nextArtboard = all_artboards[value]
-		[[doc currentPage] deselectAllLayers]
-		[nextArtboard select:true byExpandingSelection:true]
-		var rektView = [nextArtboard absoluteRect]
-		[[doc currentView] zoomToFitRect:rektView]
+		var next_artboard = all_artboards[value];
+		[[doc currentPage] deselectAllLayers];
+      	[next_artboard select:true byExpandingSelection:true]
+		[view zoomToFitRect:[next_artboard rect]]
 	}
 }
